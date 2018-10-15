@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,17 +19,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] mid = {"히어로즈","24시", "로스트","로스트륨","스몰빌","탐정몽크","빅뱅이론","프렌즈","덱스터","글러","가쉽걸","테이큰","슈퍼내추럴","브이"};
-
+        final ArrayList<String> midList = new ArrayList<String>();
         ListView list1 = (ListView)findViewById(R.id.lt);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mid);
-        list1.setAdapter(adapter);
 
-        list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,midList);
+        list1.setAdapter(adapter);
+        final EditText edt = (EditText)findViewById(R.id.edtItem);
+
+        Button BtnAdd =(Button)findViewById(R.id.btnAdd);
+        BtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                Toast.makeText(getApplicationContext(),mid[arg2],Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                midList.add(edt.getText().toString());
+                adapter.notifyDataSetChanged();
             }
         });
+
+        list1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                midList.remove(position);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
     }
 }
