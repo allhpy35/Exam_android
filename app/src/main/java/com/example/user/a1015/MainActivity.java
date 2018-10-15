@@ -17,12 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
         final String[] mid = {"히어로즈","24시", "로스트","로스트륨","스몰빌","탐정몽크","빅뱅이론","프렌즈","덱스터","글러","가쉽걸","테이큰","슈퍼내추럴","브이"};
 
-        ListView list = (ListView)findViewById(R.id.list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice,mid);
-        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        list.setAdapter(adapter);
+        ListView list1 = (ListView)findViewById(R.id.lt);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mid);
+        list1.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Toast.makeText(getApplicationContext(),mid[arg2],Toast.LENGTH_SHORT).show();
